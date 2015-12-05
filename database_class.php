@@ -40,14 +40,27 @@ class Database
 					return false;
 				}
 			} else {
-				$this->error = 'Blad zapytania SQL';
+				$this->error = 'SQL Query ERROR';
 				echo $this->error;
 				return false;
 			}
 		} else {
-			$this->error = 'Blad polaczenia z baza danych';
+			$this->error = 'Database connectig ERROR';
 			echo $this->error;
 			return false;
+		}
+	}
+
+	public function close()
+	{
+		if($this->connection)
+		{
+			if(mysqli_close($this->connection))
+				return true;
+		}
+		else {
+			$this->error = "Your're not connected";
+			echo $this->error;
 		}
 	}
 
